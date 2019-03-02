@@ -4,6 +4,7 @@ export const instagramSrcDownloader = () => {
   };
 
   const selectRelevantImages = (images) => {
+    const minImageSizePx = 100 * 100;
     const imageSizes = images.map(img => imageArea(img));
 
     const averageSizeValue = imageSizes.reduce((acc, size) => {
@@ -11,11 +12,11 @@ export const instagramSrcDownloader = () => {
     }, 0) / imageSizes.length;
 
     return images
-      .filter(img => {
-        return imageArea(img) >= averageSizeValue;
+      .filter(image => {
+        return imageArea(image) >= averageSizeValue || imageArea(image) >= minImageSizePx;
       })
-      .filter(img => {
-        const parent = img.parentNode;
+      .filter(image => {
+        const parent = image.parentNode;
         return !parent.querySelector('video');
       });
   };

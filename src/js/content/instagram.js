@@ -10,10 +10,11 @@ export const instagramSrcDownloader = () => {
     const averageSizeValue = imageSizes.reduce((acc, size) => {
       return acc + size;
     }, 0) / imageSizes.length;
+    debugger;
 
     return images
       .filter(image => {
-        return imageArea(image) >= averageSizeValue || imageArea(image) >= minImageSizePx;
+        return imageArea(image) >= averageSizeValue && imageArea(image) >= minImageSizePx;
       })
       .filter(image => {
         const parent = image.parentNode;
